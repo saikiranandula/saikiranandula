@@ -7,7 +7,7 @@ and documenting every step in public.
 
 | Project | Description | Status |
 |---------|-------------|--------|
-| [Side Project Validator](https://github.com/nullhypeai/side-project-validator) | AI-powered "Build or Don't Build" reports for indie hackers | 🔨 Building |
+| [Business Idea Validator](https://github.com/nullhypeai/side-project-validator) | AI-powered "Build or Don't Build" reports for indie hackers | 🔨 Building |
 
 ## 🛠️ My Stack
 
