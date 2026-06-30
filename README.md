@@ -1,14 +1,16 @@
-# Hey, I'm Saikiran
+# Hey, I'm Sai Kiran
 
-AI Product Manager turned indie builder. I build open-source AI products for developers and indie hackers, and document the journey in public.
+AI Product Manager turned indie builder. I build AI products end to end, from the reasoning down to payments and deploy, and I document the journey in public.
+
+Everything I've shipped lives here: **[projects.nullhype.tech](https://projects.nullhype.tech)**
 
 ## What I'm Building
 
-| Product | Description | Status |
+| Product | What it does | Status |
 |---|---|---|
-| [HypeCheck](https://github.com/nullhypeai/hypecheck) | AI startup idea validator that gives indie hackers a Hype Score, competitor analysis, demand signals, execution risks, and a clear build verdict. | Live |
-
-Live product: [hypecheck.nullhype.tech](https://hypecheck.nullhype.tech)
+| [HypeCheck](https://hypecheck.nullhype.tech) | AI startup-idea validator. A Hype Score, competitor read, demand signals, and a clear build verdict in about a minute. Powered by Claude. | Live · Paid |
+| [AdoptCheck](https://adoptcheck.vercel.app) | Adoption-risk checker for open-source code. Reads a repo's legal and security signals and returns a Use / Fork / Watch / Avoid verdict, backed by an evidence ledger. | Live |
+| [Octopus](https://local-notion-saikiranandulas-projects.vercel.app) | A lightweight Notion alternative with kanban boards, a rich-text editor, and workspace collaboration. | Live |
 
 ## My Stack
 
@@ -21,7 +23,7 @@ Live product: [hypecheck.nullhype.tech](https://hypecheck.nullhype.tech)
 
 ## Building In Public
 
-Current phase: shipping HypeCheck end to end, learning the full product stack, and turning the first product into a real launch.
+I ship small, document what I learn, and turn each build into the next one.
 
 [![X / Twitter](https://img.shields.io/badge/Follow_@nullhypeai-black?style=flat&logo=x&logoColor=white)](https://twitter.com/nullhypeai)
 
