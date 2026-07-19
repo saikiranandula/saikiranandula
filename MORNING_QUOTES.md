@@ -33,8 +33,8 @@ not, retrigger the workflow for a new one.
 
 ### 2. Get an Anthropic API key
 
-Create one at https://platform.claude.com (each daily message costs roughly
-a cent or two with Claude Opus 4.8).
+Create one at https://platform.claude.com (each daily message costs a
+fraction of a cent with Claude Haiku 4.5 — roughly $1.50 per year).
 
 ### 3. Add the three secrets to this repo
 

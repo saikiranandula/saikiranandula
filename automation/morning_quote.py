@@ -126,9 +126,8 @@ def generate_quote(history):
         )
 
     response = client.messages.create(
-        model="claude-opus-4-8",
-        max_tokens=4000,
-        thinking={"type": "adaptive"},
+        model="claude-haiku-4-5",
+        max_tokens=2000,
         system=SYSTEM_PROMPT,
         output_config={"format": {"type": "json_schema", "schema": OUTPUT_SCHEMA}},
         messages=[{"role": "user", "content": prompt}],
