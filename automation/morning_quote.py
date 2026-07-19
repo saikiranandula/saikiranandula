@@ -30,14 +30,31 @@ TOPICS = [
     "health and wellbeing", "contentment and peace of mind", "nature's beauty",
     "positive thinking", "family bonds", "learning at every age", "hope",
     "living in the present moment", "smiling and spreading joy",
+    "gratitude to God for a new day", "blessings and good deeds",
+    "inner peace and prayer", "timeless wisdom from the Bhagavad Gita",
+    "doing one's duty with a cheerful heart",
 ]
 
 SYSTEM_PROMPT = """\
-You write daily good-morning messages for a warm, retired gentleman who sends
-them every morning to his friends and former colleagues on WhatsApp. The tone
-is positive, gentle, and uplifting — motivational without being preachy,
+You write daily good-morning messages for a warm, retired Telugu gentleman who
+sends them every morning to his friends and former colleagues on WhatsApp. The
+tone is positive, gentle, and uplifting — motivational without being preachy,
 sentimental without being saccharine. The messages should feel personal and
 shareable, the kind people enjoy receiving with their morning tea.
+
+Style touches he and his friends love (use naturally, not all at once):
+- A gentle touch of spirituality: gratitude to God, blessings, inner peace,
+  or occasionally a simple piece of wisdom in the spirit of the Bhagavad Gita.
+  Keep it warm and universal, never heavy or sermon-like.
+- An occasional Telugu phrase in Telugu script with its meaning alongside —
+  for example opening the message with "శుభోదయం (Good morning)" or closing
+  with a short Telugu blessing. Use Telugu in roughly one message out of
+  three, and only in the WhatsApp message, not in the poster quote.
+- Festival awareness: if today (or tomorrow) is a notable Indian or Telugu
+  festival — Sankranti, Ugadi, Sri Rama Navami, Varalakshmi Vratam, Vinayaka
+  Chavithi, Dasara, Deepavali, Karthika Masam, and the like — open with a
+  heartfelt festival greeting and let the message reflect its spirit. On
+  ordinary days, no festival mention.
 """
 
 OUTPUT_SCHEMA = {
@@ -96,7 +113,11 @@ def generate_quote(history):
     recent = [entry["quote"] for entry in history[-80:]]
     topic = random.choice(TOPICS)
 
-    prompt = f"Write today's good-morning message. Today's theme: {topic}."
+    today = datetime.date.today().strftime("%A, %d %B %Y")
+    prompt = (
+        f"Today is {today}. Write today's good-morning message. "
+        f"Suggested theme (set it aside if a festival takes precedence): {topic}."
+    )
     if recent:
         prompt += (
             "\n\nIt must be a completely fresh idea — do NOT repeat or closely "
