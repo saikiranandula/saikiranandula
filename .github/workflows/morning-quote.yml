@@ -1,0 +1,47 @@
+name: Morning Quote
+
+on:
+  schedule:
+    # 12:30 UTC daily. See MORNING_QUOTES.md for how to change this to your
+    # local morning (GitHub cron is always UTC).
+    - cron: "30 12 * * *"
+  # The "Run workflow" button — use this to retrigger and get a fresh
+  # quote + poster if you didn't like the last one.
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: morning-quote
+  cancel-in-progress: false
+
+jobs:
+  send-quote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install anthropic playwright requests
+          playwright install --with-deps chromium
+
+      - name: Generate, render, and send
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python automation/morning_quote.py
+
+      - name: Save quote history
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add automation/history.json
+          git diff --cached --quiet || git commit -m "Record today's quote in history"
+          git push
