@@ -11,7 +11,13 @@ Evaluated: 2026-07-28.
 | `i-have-adhd-evaluation.md` | ayghri/i-have-adhd. Install decision. |
 | `no-ai-slop-evaluation.md` | petergyang/no-ai-slop. What it actually is. |
 | `blocklist-gap-analysis.md` | Head-to-head: our `ai-slop-blocklist.md` vs Peter Yang's skill. |
-| `proposed-blocklist-patch.md` | Drop-in text to close the gaps. Not applied. |
+| `proposed-blocklist-patch.md` | The nine patches, and the record of applying them. |
+| `patched/` | Final blocklist files. **Upload these to make the change permanent.** |
+| `backup/` | Originals, before patching. |
+
+## Status
+
+All nine patches applied 2026-07-28. LinkedIn copy 74 → 159 lines, X copy 51 → 138 lines. The live files under `~/.claude/skills/` are ephemeral and do not sync back to claude.ai, so `patched/` is the durable copy. See the Persistence section of `proposed-blocklist-patch.md`.
 
 ## Verdicts
 

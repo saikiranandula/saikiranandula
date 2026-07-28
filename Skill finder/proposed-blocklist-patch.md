@@ -1,6 +1,11 @@
 # Proposed patch to ai-slop-blocklist.md
 
-Drop-in text closing the gaps in `blocklist-gap-analysis.md`. **Not applied.** Nothing outside this folder was modified.
+> **STATUS: all nine patches applied 2026-07-28.**
+> Live files updated in `~/.claude/skills/*/references/ai-slop-blocklist.md`.
+> Originals in `backup/`. Final files in `patched/`.
+> **These live files are ephemeral.** See "Persistence" at the end of this doc.
+
+Drop-in text closing the gaps in `blocklist-gap-analysis.md`.
 
 Targets both copies unless noted:
 - `~/.claude/skills/linkedin-content/references/ai-slop-blocklist.md`
@@ -150,12 +155,41 @@ Options, in order of preference:
 2. **Single canonical file plus two deltas.** Cleaner, but depends on whether a skill can load a reference outside its own directory. Verify before committing to it.
 3. **Symlink the shared file.** Fragile across skill sync and packaging. Not recommended.
 
-## Suggested order
+## What was applied
 
-1. Patch 8, the X-copy corrections. One-line fix to an active bug.
-2. Patch 1 plus Patch 2, the missing patterns. Largest coverage gain per edit.
-3. Patch 5, the pass/fail loop. Makes everything else enforceable.
-4. Patch 4 plus Patch 3, voice preservation and shape tells. Prevents the over-correction that patches 1, 2, and 5 make more likely.
-5. Patch 7, word lists.
-6. Patch 6, detect mode.
-7. Patch 9, drift. Do this before the file grows further.
+All nine, in one pass. Result:
+
+| File | Before | After |
+|---|---|---|
+| `linkedin-content/references/ai-slop-blocklist.md` | 74 lines | 159 lines |
+| `nullhypeai/references/ai-slop-blocklist.md` | 51 lines | 138 lines |
+
+Both files were rebuilt rather than edited in place, because patch 9 required moving the shared content into one contiguous block. Assembly was `head + shared + tail`, and the shared block was verified byte-identical across both copies (92 lines, md5 prefix `4ef352b47582`).
+
+Two changes beyond the patch spec, both cleanups the rewrite made obvious:
+
+1. **Em dashes removed from the files' own headings.** The originals used them in section headers ("Openers (the most damaging — they set the read)") while instructing that em dashes are banned. Both files are now at zero.
+2. **Platform-specific rules pulled out of the shared sections.** Engagement-bait gating, humble-brag announcements, corporate filler, broetry, and the product-leader tells now sit in a LinkedIn-only section below the shared block. The X copy gained a parallel section carrying the emoji rule, the paragraph-based house style, and the note that its 1-to-2-sentence block structure is scannability rather than dramatic fragmentation, with a pointer at the new "Shape tells" section.
+
+### Verification
+
+- All 15 patch markers present in both files.
+- `median LinkedIn post` bug gone from the X copy.
+- `ultimately` present in the X adverb list.
+- Four backports present in the X copy: templates, qualifier sandwich, "I asked ChatGPT", artificial scarcity.
+- Five LinkedIn-only rules confirmed absent from the X copy.
+
+### Open question deliberately left alone
+
+Patch 8 specified *not* backporting engagement-bait gating to X, and that was followed. Reply-gating ("reply 'AI' and I'll DM you") is common on X too, so this is arguably worth revisiting as a tenth patch.
+
+## Persistence
+
+**The live edits will not survive this container.** Both skills are `source: custom` in `~/.claude/skills/manifest.json`, meaning they sync down from claude.ai and local edits do not sync back. The `nullhypeai` SKILL.md additionally declares itself a packaged snapshot whose source of truth is the private repo `saikiranandula/nullhype-content-os`, which is not in this session's scope.
+
+To make the change permanent, one of:
+
+1. **LinkedIn copy:** upload `patched/linkedin-content--ai-slop-blocklist.md` to the `linkedin-content` skill on claude.ai, replacing `references/ai-slop-blocklist.md`.
+2. **X copy:** commit `patched/nullhypeai--ai-slop-blocklist.md` to `saikiranandula/nullhype-content-os` at `references/ai-slop-blocklist.md`, then repackage the skill snapshot.
+
+Both patched files are committed in this repo under `patched/`, so nothing is lost when the container is reclaimed.
